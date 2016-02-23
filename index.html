@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <style>
+    body {
+      margin: 0px;
+      padding: 0px;
+    }
+    canvas {
+      border: 1px solid black;  
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="myCanvas" width="600" height="600"></canvas>
+  <script>
+    var canvas = document.getElementById('myCanvas');
+    var context = canvas.getContext('2d');
+    var centerX = canvas.width / 2;
+    var centerY = canvas.height / 2;
+    var radius = 80;
+
+    var circle = function(centerX, centerY) {
+      context.beginPath();
+      context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+      //context.fillStyle = 'white';
+      //context.fill();
+      context.lineWidth = 1;
+      context.strokeStyle = '#003300';
+      context.stroke();
+    }
+
+    console.log("p1", centerX, centerY);
+    console.log("p2", centerX, centerY-80);
+    console.log("centro pasa por y=", centerY-40);
+    circle(centerX, centerY);
+    circle(centerX, centerY-80);
+    var diffX = Math.sqrt(Math.pow(80, 2) - Math.pow( (260-300), 2));
+    circle(centerX+diffX, centerY-40);
+    circle(centerX-diffX, centerY-40);
+    circle(centerX+diffX, centerY+40);
+    circle(centerX-diffX, centerY+40);
+    circle(centerX, centerY+80);
+    /**
+    *
+    P1(300, 300)
+    P2(300, 220)
+    r = 80
+
+    P1 -> (x-300)^2 + (y-300)^2 = 80^2 
+    P2 -> (x-300)^2 + (y-220)^2 = 80^2 
+
+    Exp.
+          x^2 - 2*300*x + 300^2 + y^2 - 2*300*y + 300^2 = 80^2
+    (-)   x^2 - 2*300*x + 300^2 + y^2 - 2*220*y + 220^2 = 80^2
+          -----------------------------------------------------
+                                   (-600+440)*y - 41600 = 0
+                                               y = 41600 / -160
+                                               y = -260
+
+    calc: Math.pow(300,2)-Math.pow(220,2) = 41600
+
+    Pasa por y = 260 cosa que sospechabamos
+    (x-300)^2 = 80^2 - (y-300)^2 
+
+
+    calc: x = Math.sqrt(Math.pow(80, 2) - Math.pow( (260-300), 2)) + 300 
+
+    // http://mathforum.org/library/drmath/view/54490.html
+    If you have 2 points on a circle, both X and Y figures are known, and 
+    a radius is given, how is possible to find the centre of the circle?
+
+    Using the two given points as centres, draw two circles, each with the 
+    given radius. The places where those two circles intersect are the 
+    possible centres of the original circle. Algebraically, if the two 
+    points are (a,b) and (A,B), and the radius is r, you can solve the two 
+    equations
+
+       (x-a)^2 + (y-b)^2 = r^2,
+       (x-A)^2 + (y-B)^2 = r^2,
+
+    simultaneously. (Hint: Subtract one from the other, and you'll have a 
+    linear equation as a result. Solve that for one of the variables, and 
+    substitute in either of the above two equations. That will give you a 
+    quadratic equation in the other variable.)
+
+    This works because the distance from the centre of the circle to each 
+    of (a,b) and (A,B) is r.
+
+    Example:  Find the center of the circle passing through (1,4) and 
+    (5,1) with radius 13/2.
+
+       (x-1)^2 + (y-4)^2 = (13/2)^2,
+       (x-5)^2 + (y-1)^2 = (13/2)^2,  expanding these we get
+
+          x^2 -  2*x +  1 + y^2 - 8*y + 16 = (13/2)^2,
+     (-)  x^2 - 10*x + 25 + y^2 - 2*y +  1 = (13/2)^2,
+          --------------------------------------------  subtracting these
+                 8*x - 24       - 6*y + 15 = 0,
+       
+                                         y = (8*x-9)/6,  substituting this
+
+
+                             (x-5)^2 + ([8*x-15]/6)^2 = (13/2)^2,
+       x^2 - 10*x + 25 + (16/9)*x^2 - (20/3)*x + 25/4 = 169/4,
+                           (25/9)*x^2 - (50/3)*x - 11 = 0,
+                                  25*x^2 - 150*x - 99 = 0,
+                                 (5*x - 33)*(5*x + 3) = 0,  so
+
+       x = 33/5   or  x = -3/5,
+       y = 73/10  or  y = -23/10.
+
+    Thus the center of the circle could be at either (33/5,73/10) or 
+    (-3/5,-23/10). You can check that these points are 13/2 units away 
+    from both (1,4) and (5,1).
+    */
+  </script>
+</body>
+
+</html>
