@@ -21,14 +21,23 @@
     var centerX = canvas.width / 2;
     var centerY = canvas.height / 2;
     var radius = 80;
+    var colors = ["red", "orange", "yellow", "green", "blue", "purple", "white"];
+    var colors = ["rgba(255, 255, 255, 0.5)"];
 
+    var genRandom = function(){
+        return Math.floor(Math.random(10)*255);   
+    }
+  
     var circle = function(centerX, centerY, radius) {
       context.beginPath();
       context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-      //context.fillStyle = 'white';
-      //context.fill();
+      //context.fillStyle = colors[Math.floor(Math.random(10)*colors.length)];
+      var opacity = (Math.random(10)*0.5).toFixed(2);
+      context.fillStyle = "rgba("+genRandom()+", "+genRandom()+", "+genRandom()+", "+opacity+")"; 
+      context.fill();
       context.lineWidth = 1;
-      context.strokeStyle = '#003300';
+      //context.strokeStyle = '#003300';
+      context.strokeStyle = "rgba("+genRandom()+", "+genRandom()+", "+genRandom()+", "+opacity+")"; 
       context.stroke();
     }
 
@@ -64,12 +73,21 @@
     };
 
 
+    /*
+    fol(centerX, centerY, 80);
+    fol(centerX, centerY+160, 80);
+    fol(centerX, centerY-160, 80);
+    fol(centerX-139, centerY, 80);
+    fol(centerX+139, centerY, 80);
+    */
     for(var i = 0; i < 15; i++){
       //fol(centerX, centerY, looping(i));
       //fol(centerX+looping(i), centerY+looping(i), looping(i));
       var rand = Math.floor(Math.random(10)*1000+1);
       fol(centerX+rand, centerY+rand, looping(i));
     }
+    /*
+    */
     /**
     *
     P1(300, 300)
