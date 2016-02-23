@@ -22,7 +22,7 @@
     var centerY = canvas.height / 2;
     var radius = 80;
 
-    var circle = function(centerX, centerY) {
+    var circle = function(centerX, centerY, radius) {
       context.beginPath();
       context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
       //context.fillStyle = 'white';
@@ -32,17 +32,22 @@
       context.stroke();
     }
 
-    console.log("p1", centerX, centerY);
-    console.log("p2", centerX, centerY-80);
-    console.log("centro pasa por y=", centerY-40);
-    circle(centerX, centerY);
-    circle(centerX, centerY-80);
-    var diffX = Math.sqrt(Math.pow(80, 2) - Math.pow( (260-300), 2));
-    circle(centerX+diffX, centerY-40);
-    circle(centerX-diffX, centerY-40);
-    circle(centerX+diffX, centerY+40);
-    circle(centerX-diffX, centerY+40);
-    circle(centerX, centerY+80);
+    var fol = function(centerX, centerY, rad) {
+      console.log("p1", centerX, centerY);
+      console.log("p2", centerX, centerY-rad);
+      console.log("centro pasa por y=", centerY-(rad/2));
+      circle(centerX, centerY, rad);
+      circle(centerX, centerY-rad, rad);
+      var diffX = Math.sqrt(Math.pow(rad, 2) - Math.pow( ((centerY-(rad/2))-centerY), 2));
+      circle(centerX+diffX, centerY-(rad/2), rad);
+      circle(centerX-diffX, centerY-(rad/2), rad);
+      circle(centerX+diffX, centerY+(rad/2), rad);
+      circle(centerX-diffX, centerY+(rad/2), rad);
+      circle(centerX, centerY+rad, rad);
+    }
+
+    fol(centerX, centerY, 80);
+    fol(centerX, centerY, 40);
     /**
     *
     P1(300, 300)
