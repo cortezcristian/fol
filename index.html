@@ -46,8 +46,27 @@
       circle(centerX, centerY+rad, rad);
     }
 
+    /*
     fol(centerX, centerY, 80);
     fol(centerX, centerY, 40);
+    fol(centerX, centerY, 20);
+    */
+
+    //var fib = [1,2,3,5,8,13,21];
+    var looping = function(n) {
+        var a = 0, b = 1, f = 1;
+        for(var i = 2; i <= n; i++) {
+            f = a + b;
+            a = b;
+            b = f;
+        }
+        return f;
+    };
+
+
+    for(var i = 0; i < 15; i++){
+      fol(centerX, centerY, looping(i));
+    }
     /**
     *
     P1(300, 300)
